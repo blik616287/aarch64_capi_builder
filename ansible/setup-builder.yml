@@ -1,0 +1,103 @@
+---
+- name: Configure ARM CAPI Image Builder Host
+  hosts: role_builder
+  become: yes
+  vars:
+    kubernetes_version: "1.33.0"
+    image_builder_dir: /opt/image-builder/image-builder
+    output_dir: /opt/image-builder/output
+
+  tasks:
+    - name: Wait for cloud-init to complete
+      wait_for:
+        path: /tmp/user-data-complete
+        timeout: 600
+
+    - name: Ensure QEMU ARM64 emulation is enabled
+      command: update-binfmts --enable qemu-aarch64
+      changed_when: false
+
+    - name: Verify binfmt_misc is working
+      shell: |
+        cat /proc/sys/fs/binfmt_misc/qemu-aarch64 | grep enabled
+      register: binfmt_check
+      changed_when: false
+      failed_when: "'enabled' not in binfmt_check.stdout"
+
+    - name: Create output directory
+      file:
+        path: "{{ output_dir }}"
+        state: directory
+        owner: ubuntu
+        group: ubuntu
+        mode: '0755'
+
+    - name: Install additional dependencies for image-builder
+      apt:
+        name:
+          - libguestfs-tools
+          - virtinst
+          - ovmf
+          - swtpm
+          - libnbd-bin
+        state: present
+        update_cache: yes
+
+    - name: Install image-builder Python dependencies
+      become_user: ubuntu
+      pip:
+        name:
+          - ansible
+          - passlib
+          - netaddr
+        state: present
+        extra_args: --user
+
+    - name: Install image-builder dependencies via make
+      become_user: ubuntu
+      shell: |
+        cd {{ image_builder_dir }}/images/capi
+        make deps-qemu
+      args:
+        creates: "{{ image_builder_dir }}/images/capi/.local/bin/packer"
+      environment:
+        PATH: "/home/ubuntu/.local/bin:{{ ansible_env.PATH }}"
+
+    - name: Copy custom ARM64 packer variables
+      copy:
+        src: "{{ playbook_dir }}/../packer/vars/arm64-ubuntu-2204-k8s-1.33.json"
+        dest: "{{ image_builder_dir }}/images/capi/packer/config/arm64-ubuntu-2204-k8s-1.33.json"
+        owner: ubuntu
+        group: ubuntu
+        mode: '0644'
+
+    - name: Copy build scripts
+      copy:
+        src: "{{ playbook_dir }}/../scripts/"
+        dest: /opt/image-builder/scripts/
+        owner: ubuntu
+        group: ubuntu
+        mode: '0755'
+
+    - name: Create S3 bucket name file
+      copy:
+        content: |
+          # Source this file to get S3 bucket name
+          export S3_BUCKET="{{ lookup('env', 'S3_BUCKET') | default('arm-capi-builder-images', true) }}"
+        dest: /opt/image-builder/.env
+        owner: ubuntu
+        group: ubuntu
+        mode: '0644'
+
+    - name: Print build instructions
+      debug:
+        msg: |
+          Build host is ready!
+
+          To build the ARM64 CAPI image:
+            1. SSH to the build host
+            2. cd /opt/image-builder/scripts
+            3. ./build-arm-image.sh
+
+          The build will take approximately 30-60 minutes.
+          Output will be in /opt/image-builder/output/

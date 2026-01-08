@@ -1,0 +1,2220 @@
+Warning: Permanently added '3.145.162.195' (ED25519) to the list of known hosts.
+
+╔═══════════════════════════════════════════════════════════════════╗
+║           ARM64 CAPI Image Build - Remote Builder                 ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+  Kubernetes: v1.32.4
+  containerd: 2.0.4
+  CNI:        1.6.0
+  crictl:     1.32.0
+
+[INFO] 02:10:45 Setting up build environment...
+[SUCCESS] 02:10:45 Build environment ready
+[INFO] 02:10:45 Creating Packer configuration...
+[INFO] 02:10:45 Installing patched sysprep tasks file...
+[INFO] 02:10:45 Installing patched sysprep handlers file...
+[SUCCESS] 02:10:45 Packer configuration created
+[INFO] 02:10:45 Starting Packer build...
+[1;32mqemu.capi-ubuntu-arm64: output will be in this color.[0m
+
+[1;32m==> qemu.capi-ubuntu-arm64: Retrieving ISO[0m
+[1;32m==> qemu.capi-ubuntu-arm64: Trying https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-arm64.img[0m
+[1;32m==> qemu.capi-ubuntu-arm64: Trying https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-arm64.img?checksum=sha256%3A1298fce863dacc56fd5bf8271e28650014bf8208f1fc412a40f40bb36be7a24b[0m
+[1;32m==> qemu.capi-ubuntu-arm64: https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-arm64.img?checksum=sha256%3A1298fce863dacc56fd5bf8271e28650014bf8208f1fc412a40f40bb36be7a24b => /home/ubuntu/.cache/packer/a67cb6fa4c00431087fc54678ba37031f093af2f.iso[0m
+[1;32m==> qemu.capi-ubuntu-arm64: Creating CD disk...[0m
+[1;32m==> qemu.capi-ubuntu-arm64: xorriso 1.5.4 : RockRidge filesystem manipulator, libburnia project.[0m
+[1;32m==> qemu.capi-ubuntu-arm64: Drive current: -outdev 'stdio:/tmp/packer1796887487.iso'[0m
+[1;32m==> qemu.capi-ubuntu-arm64: Media current: stdio file, overwriteable[0m
+[1;32m==> qemu.capi-ubuntu-arm64: Media status : is blank[0m
+[1;32m==> qemu.capi-ubuntu-arm64: Media summary: 0 sessions, 0 data blocks, 0 data, 77.2g free[0m
+[1;32m==> qemu.capi-ubuntu-arm64: xorriso : WARNING : -volid text does not comply to ISO 9660 / ECMA 119 rules[0m
+[1;32m==> qemu.capi-ubuntu-arm64: Added to ISO image: directory '/'='/tmp/packer_to_cdrom2589534016'[0m
+[1;32m==> qemu.capi-ubuntu-arm64: xorriso : UPDATE :       2 files added in 1 seconds[0m
+[1;32m==> qemu.capi-ubuntu-arm64: xorriso : UPDATE :       2 files added in 1 seconds[0m
+[1;32m==> qemu.capi-ubuntu-arm64: ISO image produced: 185 sectors[0m
+[1;32m==> qemu.capi-ubuntu-arm64: Written to medium : 185 sectors at LBA 0[0m
+[1;32m==> qemu.capi-ubuntu-arm64: Writing to 'stdio:/tmp/packer1796887487.iso' completed successfully.[0m
+[1;32m==> qemu.capi-ubuntu-arm64: Done copying paths from CD_dirs[0m
+[1;32m==> qemu.capi-ubuntu-arm64: Copying hard drive...[0m
+[1;32m==> qemu.capi-ubuntu-arm64: Resizing hard drive...[0m
+[1;32m==> qemu.capi-ubuntu-arm64: Found port for communicator (SSH, WinRM, etc): 4071.[0m
+[1;32m==> qemu.capi-ubuntu-arm64: Creating temporary RSA SSH key for instance...[0m
+[1;32m==> qemu.capi-ubuntu-arm64: Looking for available port between 5900 and 6000 on 127.0.0.1[0m
+[1;32m==> qemu.capi-ubuntu-arm64: Starting VM, booting disk image[0m
+[1;32m==> qemu.capi-ubuntu-arm64: The VM will be run headless, without a GUI. If you want to
+==> qemu.capi-ubuntu-arm64: view the screen of the VM, connect via VNC without a password to
+==> qemu.capi-ubuntu-arm64: vnc://127.0.0.1:5944[0m
+[1;32m==> qemu.capi-ubuntu-arm64: Overriding default Qemu arguments with qemuargs template option...[0m
+[1;32m==> qemu.capi-ubuntu-arm64: Waiting 10s for boot...[0m
+[1;32m==> qemu.capi-ubuntu-arm64: Connecting to VM via VNC (127.0.0.1:5944)[0m
+[1;32m==> qemu.capi-ubuntu-arm64: Typing the boot commands over VNC...[0m
+[1;32m==> qemu.capi-ubuntu-arm64: Not using a NetBridge -- skipping StepWaitGuestAddress[0m
+[1;32m==> qemu.capi-ubuntu-arm64: Using SSH communicator to connect: 127.0.0.1[0m
+[1;32m==> qemu.capi-ubuntu-arm64: Waiting for SSH to become available...[0m
+[1;32m==> qemu.capi-ubuntu-arm64: Connected to SSH![0m
+[1;32m==> qemu.capi-ubuntu-arm64: Provisioning with Ansible...[0m
+[1;32m==> qemu.capi-ubuntu-arm64: Not using Proxy adapter for Ansible run:
+==> qemu.capi-ubuntu-arm64: 	Using ssh keys from Packer communicator...[0m
+[1;32m==> qemu.capi-ubuntu-arm64: Executing Ansible: ansible-playbook -e packer_build_name="capi-ubuntu-arm64" -e packer_builder_type=qemu -e packer_http_addr=10.0.2.2:0 --ssh-extra-args '-o IdentitiesOnly=yes' -e ansible_ssh_pass=***** -e ansible_ssh_common_args='-o PubkeyAuthentication=no -o PasswordAuthentication=yes' -e ubuntu_repo=http://ports.ubuntu.com/ubuntu-ports -e ubuntu_security_repo=http://ports.ubuntu.com/ubuntu-ports -e extra_debs= -e extra_repos= -e @/opt/capi-build/arm64-vars.json -e ansible_ssh_private_key_file=/tmp/ansible-key2233785538 -i /tmp/packer-provisioner-ansible2587067582 /opt/test-images/image-builder/images/capi/ansible/firstboot.yml[0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: PLAY [Bootstrap Python] ********************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [Check if Python is installed] ********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: ok: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [Install Python] **********************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: PLAY [all] *********************************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [Gathering Facts] *********************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: [WARNING]: Platform linux on host default is using the discovered Python[0m
+[1;32m==> qemu.capi-ubuntu-arm64: interpreter at /usr/bin/python3.10, but future installation of another Python[0m
+[1;32m==> qemu.capi-ubuntu-arm64: interpreter could change the meaning of that path. See[0m
+[1;32m==> qemu.capi-ubuntu-arm64: https://docs.ansible.com/ansible-[0m
+[1;32m==> qemu.capi-ubuntu-arm64: core/2.17/reference_appendices/interpreter_discovery.html for more information.[0m
+[1;32m==> qemu.capi-ubuntu-arm64: ok: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [ansible.builtin.include_role : {{ role }}] *******************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [ansible.builtin.include_role : firstboot] ********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: included: firstboot for default[0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Put templated sources.list in place] *****************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Put templated ubuntu.sources in place] ***************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Put templated apt.conf.d/90proxy in place when defined] **********[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Ensure cloud-final is in a running state] ************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Find existing repo files] ****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Disable repos] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra repos] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Hold nullboot] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Add '--no-tpm --no-efivars' to nullboot post install script] *****[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Perform a dist-upgrade] ******************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install baseline dependencies] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra debs] **********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install pinned debs] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Remove '--no-tpm --no-efivars' from nullboot post install script] ***[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : ansible.builtin.include_tasks] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Create system-environment-generators directory] ******************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Add env generator that includes system PATH on service path] *****[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Enable systemd-timesyncd unit] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Start service systemd-timesyncd, if not started] *****************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Find existing repo files] ****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Disable repos] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra repos] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Perform a tdnf update] *******************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install baseline dependencies on Azure Linux] ********************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra rpms] **********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : RHEL subscription] ***********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Perform dnf clean] ***********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Enable the EPEL repository] **************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install EPEL package] ********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Import epel gpg key] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Add epel repo] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Find existing repo files] ****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Disable repos] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra repos] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Perform a yum update] ********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install baseline dependencies] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra rpms] **********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Add bash_profile] ************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Find existing repo files] ****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Disable repos] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra repos] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Update the repos package to import the recent gpg keys] **********[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Perform a tdnf distro-sync] **************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Concatenate the Photon RPMs] *************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install baseline dependencies] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra RPMs] **********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Increase tmpfs size] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Reset iptables rules input] **************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Reset ip6tables rules input] *************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install pip config file] *****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Put templated sources.list in place] *****************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Put templated ubuntu.sources in place] ***************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Put templated apt.conf.d/90proxy in place when defined] **********[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Ensure cloud-final is in a running state] ************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Find existing repo files] ****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Disable repos] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra repos] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Hold nullboot] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Add '--no-tpm --no-efivars' to nullboot post install script] *****[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Perform a dist-upgrade] ******************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install baseline dependencies] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra debs] **********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: ok: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install pinned debs] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: ok: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Remove '--no-tpm --no-efivars' from nullboot post install script] ***[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : ansible.builtin.include_tasks] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Create system-environment-generators directory] ******************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Add env generator that includes system PATH on service path] *****[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Enable systemd-timesyncd unit] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Start service systemd-timesyncd, if not started] *****************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Find existing repo files] ****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Disable repos] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra repos] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Perform a tdnf update] *******************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install baseline dependencies on Azure Linux] ********************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra rpms] **********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : RHEL subscription] ***********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Perform dnf clean] ***********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Enable the EPEL repository] **************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install EPEL package] ********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Import epel gpg key] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Add epel repo] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Find existing repo files] ****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Disable repos] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra repos] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Perform a yum update] ********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install baseline dependencies] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra rpms] **********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Add bash_profile] ************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Find existing repo files] ****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Disable repos] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra repos] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Update the repos package to import the recent gpg keys] **********[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Perform a tdnf distro-sync] **************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Concatenate the Photon RPMs] *************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install baseline dependencies] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra RPMs] **********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Increase tmpfs size] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Reset iptables rules input] **************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Reset ip6tables rules input] *************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install pip config file] *****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [firstboot : ansible.builtin.include_tasks] *******************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [firstboot : ansible.builtin.include_tasks] *******************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: included: /opt/test-images/image-builder/images/capi/ansible/roles/firstboot/tasks/qemu.yml for default[0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [firstboot : ansible.builtin.meta] ****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [ansible.builtin.include_role : {{ role }}] *******************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: PLAY RECAP *********************************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: default                    : ok=9    changed=3    unreachable=0    failed=0    skipped=99   rescued=0    ignored=0[0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: Provisioning with shell script: /tmp/packer-shell4131421816[0m
+[1;32m==> qemu.capi-ubuntu-arm64: Pausing 30s before the next provisioner...[0m
+[1;32m==> qemu.capi-ubuntu-arm64: Provisioning with shell script: /tmp/packer-shell595136104[0m
+[1;32m==> qemu.capi-ubuntu-arm64: Reconnected after reboot[0m
+[1;32m==> qemu.capi-ubuntu-arm64: Provisioning with Ansible...[0m
+[1;32m==> qemu.capi-ubuntu-arm64: Not using Proxy adapter for Ansible run:
+==> qemu.capi-ubuntu-arm64: 	Using ssh keys from Packer communicator...[0m
+[1;32m==> qemu.capi-ubuntu-arm64: Executing Ansible: ansible-playbook -e packer_build_name="capi-ubuntu-arm64" -e packer_builder_type=qemu -e packer_http_addr=10.0.2.2:0 --ssh-extra-args '-o IdentitiesOnly=yes' -e ansible_ssh_pass=***** -e ansible_ssh_common_args='-o PubkeyAuthentication=no -o PasswordAuthentication=yes' -e @/opt/capi-build/arm64-vars.json -e ubuntu_repo=http://ports.ubuntu.com/ubuntu-ports -e ubuntu_security_repo=http://ports.ubuntu.com/ubuntu-ports -e extra_debs= -e extra_repos= -e kubernetes_semver=v1.32.4 -e kubernetes_series=v1.32 -e kubernetes_cni_semver=v1.6.0 -e kubernetes_cni_source_type=http -e kubernetes_cni_http_source=https://github.com/containernetworking/plugins/releases/download -e kubernetes_source_type=http -e kubernetes_http_source=https://dl.k8s.io/release -e kubeadm_template=etc/kubeadm.yml -e kubernetes_container_registry=registry.k8s.io -e containerd_version=2.0.4 -e containerd_url=https://github.com/containerd/containerd/releases/download/v2.0.4/containerd-2.0.4-linux-arm64.tar.gz -e containerd_sha256= -e containerd_service_url=https://raw.githubusercontent.com/containerd/containerd/refs/tags/v2.0.4/containerd.service -e containerd_wasm_shims_runtimes= -e containerd_additional_settings= -e containerd_cri_socket=/var/run/containerd/containerd.sock -e containerd_gvisor_runtime=false -e containerd_gvisor_version=latest -e crictl_url=https://github.com/kubernetes-sigs/cri-tools/releases/download/v1.32.0/crictl-v1.32.0-linux-arm64.tar.gz -e crictl_sha256= -e crictl_source_type=http -e runc_version=1.2.8 -e ecr_credential_provider=false -e node_custom_roles_post_sysprep= -e python_path= -e ansible_ssh_private_key_file=/tmp/ansible-key2757415232 -i /tmp/packer-provisioner-ansible927457720 /opt/test-images/image-builder/images/capi/ansible/node.yml[0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: PLAY [all] *********************************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [Gathering Facts] *********************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: [WARNING]: Platform linux on host default is using the discovered Python[0m
+[1;32m==> qemu.capi-ubuntu-arm64: interpreter at /usr/bin/python3.10, but future installation of another Python[0m
+[1;32m==> qemu.capi-ubuntu-arm64: interpreter could change the meaning of that path. See[0m
+[1;32m==> qemu.capi-ubuntu-arm64: https://docs.ansible.com/ansible-[0m
+[1;32m==> qemu.capi-ubuntu-arm64: core/2.17/reference_appendices/interpreter_discovery.html for more information.[0m
+[1;32m==> qemu.capi-ubuntu-arm64: ok: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [ansible.builtin.include_role : {{ role }}] *******************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [ansible.builtin.include_role : node] *************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: included: node for default[0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Put templated sources.list in place] *****************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Put templated ubuntu.sources in place] ***************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Put templated apt.conf.d/90proxy in place when defined] **********[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Ensure cloud-final is in a running state] ************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Find existing repo files] ****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Disable repos] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra repos] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Hold nullboot] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Add '--no-tpm --no-efivars' to nullboot post install script] *****[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Perform a dist-upgrade] ******************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install baseline dependencies] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra debs] **********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install pinned debs] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Remove '--no-tpm --no-efivars' from nullboot post install script] ***[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : ansible.builtin.include_tasks] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Create system-environment-generators directory] ******************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Add env generator that includes system PATH on service path] *****[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Enable systemd-timesyncd unit] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Start service systemd-timesyncd, if not started] *****************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Find existing repo files] ****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Disable repos] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra repos] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Perform a tdnf update] *******************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install baseline dependencies on Azure Linux] ********************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra rpms] **********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : RHEL subscription] ***********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Perform dnf clean] ***********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Enable the EPEL repository] **************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install EPEL package] ********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Import epel gpg key] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Add epel repo] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Find existing repo files] ****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Disable repos] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra repos] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Perform a yum update] ********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install baseline dependencies] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra rpms] **********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Add bash_profile] ************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Find existing repo files] ****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Disable repos] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra repos] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Update the repos package to import the recent gpg keys] **********[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Perform a tdnf distro-sync] **************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Concatenate the Photon RPMs] *************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install baseline dependencies] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra RPMs] **********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Increase tmpfs size] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Reset iptables rules input] **************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Reset ip6tables rules input] *************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install pip config file] *****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Put templated sources.list in place] *****************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Put templated ubuntu.sources in place] ***************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Put templated apt.conf.d/90proxy in place when defined] **********[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Ensure cloud-final is in a running state] ************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Find existing repo files] ****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Disable repos] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra repos] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Hold nullboot] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Add '--no-tpm --no-efivars' to nullboot post install script] *****[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Perform a dist-upgrade] ******************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install baseline dependencies] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra debs] **********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install pinned debs] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Remove '--no-tpm --no-efivars' from nullboot post install script] ***[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : ansible.builtin.include_tasks] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Create system-environment-generators directory] ******************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Add env generator that includes system PATH on service path] *****[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Enable systemd-timesyncd unit] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Start service systemd-timesyncd, if not started] *****************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Find existing repo files] ****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Disable repos] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra repos] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Perform a tdnf update] *******************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install baseline dependencies on Azure Linux] ********************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra rpms] **********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : RHEL subscription] ***********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Perform dnf clean] ***********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Enable the EPEL repository] **************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install EPEL package] ********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Import epel gpg key] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Add epel repo] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Find existing repo files] ****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Disable repos] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra repos] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Perform a yum update] ********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install baseline dependencies] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra rpms] **********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Add bash_profile] ************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Find existing repo files] ****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Disable repos] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra repos] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Update the repos package to import the recent gpg keys] **********[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Perform a tdnf distro-sync] **************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Concatenate the Photon RPMs] *************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install baseline dependencies] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra RPMs] **********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Increase tmpfs size] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Reset iptables rules input] **************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Reset ip6tables rules input] *************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install pip config file] *****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Put templated sources.list in place] *****************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Put templated ubuntu.sources in place] ***************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Put templated apt.conf.d/90proxy in place when defined] **********[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Ensure cloud-final is in a running state] ************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Find existing repo files] ****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Disable repos] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra repos] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Hold nullboot] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Add '--no-tpm --no-efivars' to nullboot post install script] *****[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Perform a dist-upgrade] ******************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install baseline dependencies] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra debs] **********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install pinned debs] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Remove '--no-tpm --no-efivars' from nullboot post install script] ***[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : ansible.builtin.include_tasks] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Create system-environment-generators directory] ******************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Add env generator that includes system PATH on service path] *****[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Enable systemd-timesyncd unit] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Start service systemd-timesyncd, if not started] *****************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Find existing repo files] ****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Disable repos] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra repos] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Perform a tdnf update] *******************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install baseline dependencies on Azure Linux] ********************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra rpms] **********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : RHEL subscription] ***********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Perform dnf clean] ***********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Enable the EPEL repository] **************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install EPEL package] ********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Import epel gpg key] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Add epel repo] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Find existing repo files] ****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Disable repos] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra repos] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Perform a yum update] ********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install baseline dependencies] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra rpms] **********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Add bash_profile] ************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Find existing repo files] ****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Disable repos] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra repos] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Update the repos package to import the recent gpg keys] **********[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Perform a tdnf distro-sync] **************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Concatenate the Photon RPMs] *************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install baseline dependencies] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra RPMs] **********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Increase tmpfs size] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Reset iptables rules input] **************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Reset ip6tables rules input] *************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install pip config file] *****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Put templated sources.list in place] *****************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Put templated ubuntu.sources in place] ***************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Put templated apt.conf.d/90proxy in place when defined] **********[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Ensure cloud-final is in a running state] ************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Find existing repo files] ****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Disable repos] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra repos] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Hold nullboot] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Add '--no-tpm --no-efivars' to nullboot post install script] *****[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Perform a dist-upgrade] ******************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install baseline dependencies] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra debs] **********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install pinned debs] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Remove '--no-tpm --no-efivars' from nullboot post install script] ***[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : ansible.builtin.include_tasks] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Create system-environment-generators directory] ******************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Add env generator that includes system PATH on service path] *****[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Enable systemd-timesyncd unit] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Start service systemd-timesyncd, if not started] *****************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Find existing repo files] ****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Disable repos] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra repos] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Perform a tdnf update] *******************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install baseline dependencies on Azure Linux] ********************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra rpms] **********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : RHEL subscription] ***********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Perform dnf clean] ***********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Enable the EPEL repository] **************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install EPEL package] ********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Import epel gpg key] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Add epel repo] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Find existing repo files] ****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Disable repos] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra repos] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Perform a yum update] ********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install baseline dependencies] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra rpms] **********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Add bash_profile] ************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Find existing repo files] ****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Disable repos] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra repos] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Update the repos package to import the recent gpg keys] **********[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Perform a tdnf distro-sync] **************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Concatenate the Photon RPMs] *************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install baseline dependencies] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra RPMs] **********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Increase tmpfs size] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Reset iptables rules input] **************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Reset ip6tables rules input] *************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install pip config file] *****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Put templated sources.list in place] *****************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Put templated ubuntu.sources in place] ***************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Put templated apt.conf.d/90proxy in place when defined] **********[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Ensure cloud-final is in a running state] ************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Find existing repo files] ****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Disable repos] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra repos] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Hold nullboot] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Add '--no-tpm --no-efivars' to nullboot post install script] *****[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Perform a dist-upgrade] ******************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install baseline dependencies] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra debs] **********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install pinned debs] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Remove '--no-tpm --no-efivars' from nullboot post install script] ***[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : ansible.builtin.include_tasks] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Create system-environment-generators directory] ******************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Add env generator that includes system PATH on service path] *****[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Enable systemd-timesyncd unit] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Start service systemd-timesyncd, if not started] *****************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Find existing repo files] ****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Disable repos] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra repos] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Perform a tdnf update] *******************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install baseline dependencies on Azure Linux] ********************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra rpms] **********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : RHEL subscription] ***********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Perform dnf clean] ***********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Enable the EPEL repository] **************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install EPEL package] ********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Import epel gpg key] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Add epel repo] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Find existing repo files] ****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Disable repos] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra repos] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Perform a yum update] ********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install baseline dependencies] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra rpms] **********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Add bash_profile] ************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Find existing repo files] ****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Disable repos] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra repos] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Update the repos package to import the recent gpg keys] **********[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Perform a tdnf distro-sync] **************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Concatenate the Photon RPMs] *************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install baseline dependencies] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra RPMs] **********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Increase tmpfs size] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Reset iptables rules input] **************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Reset ip6tables rules input] *************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install pip config file] *****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Put templated sources.list in place] *****************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Put templated ubuntu.sources in place] ***************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Put templated apt.conf.d/90proxy in place when defined] **********[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Ensure cloud-final is in a running state] ************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Find existing repo files] ****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Disable repos] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra repos] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Hold nullboot] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Add '--no-tpm --no-efivars' to nullboot post install script] *****[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Perform a dist-upgrade] ******************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install baseline dependencies] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra debs] **********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install pinned debs] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Remove '--no-tpm --no-efivars' from nullboot post install script] ***[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : ansible.builtin.include_tasks] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Create system-environment-generators directory] ******************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Add env generator that includes system PATH on service path] *****[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Enable systemd-timesyncd unit] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Start service systemd-timesyncd, if not started] *****************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Find existing repo files] ****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Disable repos] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra repos] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Perform a tdnf update] *******************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install baseline dependencies on Azure Linux] ********************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra rpms] **********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : RHEL subscription] ***********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Perform dnf clean] ***********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Enable the EPEL repository] **************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install EPEL package] ********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Import epel gpg key] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Add epel repo] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Find existing repo files] ****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Disable repos] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra repos] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Perform a yum update] ********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install baseline dependencies] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra rpms] **********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Add bash_profile] ************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Find existing repo files] ****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Disable repos] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra repos] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Update the repos package to import the recent gpg keys] **********[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Perform a tdnf distro-sync] **************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Concatenate the Photon RPMs] *************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install baseline dependencies] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install extra RPMs] **********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Increase tmpfs size] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Reset iptables rules input] **************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Reset ip6tables rules input] *************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [setup : Install pip config file] *****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [node : Leak mDNS to DNS (cloud-init-nics) (enable .local domain lookups)] ***[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [node : Leak mDNS to DNS (dhcp) (enable .local domain lookups)] ***********[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [node : Double TCP small queue limit to be the same as Ubuntu] ************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [node : Disable Apparmor service] *****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [node : Disable Apparmor in kernel] ***************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [node : Check if tdnf cache timer exists] *********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [node : Disable tdnf cache timer] *****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [node : Ensure sysstat is running and comes on at reboot] *****************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [node : Disable security updates on boot] *********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [node : Override Flatcar's OS family] *************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [node : Create /etc/modprobe.d directory] *********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [node : Blacklist usb-storage module] *************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [node : Set default HOME_MODE in login.defs] ******************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [node : Ensure overlay module is present] *********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [node : Ensure br_netfilter module is present] ****************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [node : Persist required kernel modules] **********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [node : Set and persist kernel params] ************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item={'param': 'net.bridge.bridge-nf-call-iptables', 'val': 1})[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item={'param': 'net.bridge.bridge-nf-call-ip6tables', 'val': 1})[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item={'param': 'net.ipv4.ip_forward', 'val': 1})[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item={'param': 'net.ipv6.conf.all.forwarding', 'val': 1})[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item={'param': 'net.ipv6.conf.all.disable_ipv6', 'val': 0})[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item={'param': 'net.ipv4.tcp_congestion_control', 'val': 'bbr'})[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item={'param': 'vm.overcommit_memory', 'val': 1})[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item={'param': 'kernel.panic', 'val': 10})[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item={'param': 'kernel.panic_on_oops', 'val': 1})[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item={'param': 'fs.inotify.max_user_instances', 'val': 8192})[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item={'param': 'fs.inotify.max_user_watches', 'val': 524288})[0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [node : Disable swap memory] **********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [node : Edit fstab file to disable swap] **********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [node : Disable conntrackd service] ***************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [node : Ensure auditd is running and comes on at reboot] ******************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: ok: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [node : Configure auditd rules for containerd] ****************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [node : Ensure reverse packet filtering is set as strict] *****************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [node : Set transparent huge pages to madvise] ****************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [node : Copy udev etcd network tuning rules] ******************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [node : Copy etcd network tuning script] **********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [ansible.builtin.include_role : providers] ********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: included: providers for default[0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [providers : ansible.builtin.include_tasks] *******************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [providers : ansible.builtin.include_tasks] *******************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [providers : ansible.builtin.include_tasks] *******************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [providers : ansible.builtin.include_tasks] *******************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [providers : ansible.builtin.include_tasks] *******************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [providers : ansible.builtin.include_tasks] *******************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [providers : ansible.builtin.include_tasks] *******************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [providers : ansible.builtin.include_tasks] *******************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [providers : ansible.builtin.include_tasks] *******************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: included: /opt/test-images/image-builder/images/capi/ansible/roles/providers/tasks/qemu.yml for default[0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [providers : Install cloud-init packages] *********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [providers : Enable hv-kvp-daemon] ****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [providers : ansible.builtin.include_tasks] *******************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [providers : ansible.builtin.include_tasks] *******************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [providers : ansible.builtin.include_tasks] *******************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [providers : ansible.builtin.include_tasks] *******************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [providers : ansible.builtin.include_tasks] *******************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [providers : ansible.builtin.include_tasks] *******************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [providers : ansible.builtin.include_tasks] *******************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [providers : Creates unit file directory for cloud-final] *****************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [providers : Create cloud-final boot order drop in file] ******************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [providers : Creates unit file directory for cloud-config] ****************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [providers : Create cloud-config boot order drop in file] *****************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [providers : Make sure all cloud init services are enabled] ***************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: ok: [default] => (item=cloud-final)[0m
+[1;32m==> qemu.capi-ubuntu-arm64: ok: [default] => (item=cloud-config)[0m
+[1;32m==> qemu.capi-ubuntu-arm64: ok: [default] => (item=cloud-init)[0m
+[1;32m==> qemu.capi-ubuntu-arm64: ok: [default] => (item=cloud-init-local)[0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [providers : Create cloud-init config file] *******************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [providers : Set cloudinit feature flags] *********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [providers : Set cloudinit feature flags for redhat 8] ********************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [providers : Set cloudinit feature flags for redhat 9] ********************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [providers : Patch cloud-init feature flags for Debian-based OS] **********[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [providers : Patch cloud-init feature flags for RedHat 9] *****************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [providers : Ensure chrony is running] ************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [ansible.builtin.include_role : containerd] *******************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: included: containerd for default[0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [containerd : Install libseccomp2 package] ********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: ok: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [containerd : Install libseccomp package] *********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [containerd : Install libseccomp package] *********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [containerd : Create /usr/local/sbin directory if it does not exist] ******[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [containerd : Download containerd] ****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [containerd : Download containerd.service] ********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [containerd : Download runc] **********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [containerd : Download containerd-wasm-shims] *****************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default] => (item=)[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [containerd : Create a directory if it does not exist] ********************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: ok: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [containerd : Unpack containerd] ******************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [containerd : Copy containerd.service to /etc/systemd/system] *************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [containerd : Copy runc to /usr/local/sbin] *******************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [containerd : Unpack containerd-wasm-shims] *******************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default] => (item=)[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [containerd : Unpack containerd for Flatcar to /opt/bin] ******************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [containerd : Copy runc to /opt/bin] **************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [containerd : Unpack containerd-wasm-shims for Flatcar to /opt/bin] *******[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default] => (item=)[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [containerd : Create unit file directory] *********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [containerd : Create systemd unit drop-in file for containerd to run from /opt/bin] ***[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [containerd : Create containerd memory pressure drop-in file] *************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [containerd : Create containerd max tasks drop-in file] *******************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [containerd : Create containerd LimitNOFILE drop in file] *****************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [containerd : Create containerd http proxy conf file if needed] ***********[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [containerd : Creates containerd config directory] ************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [containerd : Creates containerd certificates directory] ******************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [containerd : Copy in containerd config file etc/containerd/config.toml] ***[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [containerd : Copy in crictl config] **************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [containerd : Start containerd service] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [containerd : Delete containerd tarball] **********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [containerd : Delete runc bin] ********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [containerd : Delete containerd.service] **********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [containerd : Delete containerd-wasm-shims tarballs] **********************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default] => (item=)[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [containerd : Download runsc for gvisor] **********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default] => (item=runsc)[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default] => (item=containerd-shim-runsc-v1)[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [containerd : Install runsc as a runtime] *********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [ansible.builtin.include_role : kubernetes] *******************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: included: kubernetes for default[0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Add the Kubernetes repo key] ********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Add the Kubernetes repo] ************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Install Kubernetes] *****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Add the Kubernetes repo] ************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Install Kubernetes] *****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Allow Kubernetes API server through iptables] ***************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Persist iptables configuration] *****************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Add the Kubernetes repo] ************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Install Kubernetes] *****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Add the kubernetes repo] ************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Install Kubernetes] *****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Create CNI directory] ***************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Download CNI tarball] ***************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Install CNI] ************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Remove CNI tarball] *****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Download Kubernetes binaries] *******************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item=kubeadm)[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item=kubectl)[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item=kubelet)[0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Download Kubernetes images] *********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item=kube-apiserver.tar)[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item=kube-controller-manager.tar)[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item=kube-scheduler.tar)[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item=kube-proxy.tar)[0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Copy Kubernetes image modification script] ******************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Modify Kubernetes images] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item=kube-apiserver.tar)[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item=kube-controller-manager.tar)[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item=kube-scheduler.tar)[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item=kube-proxy.tar)[0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Remove Kubernetes image modification script] ****************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Load Kubernetes images] *************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item=kube-apiserver.tar)[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item=kube-controller-manager.tar)[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item=kube-scheduler.tar)[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item=kube-proxy.tar)[0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Remove Kubernetes images] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item=kube-apiserver.tar)[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item=kube-controller-manager.tar)[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item=kube-scheduler.tar)[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item=kube-proxy.tar)[0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Create Kubernetes manifests directory] **********************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Create kubelet sysconfig directory] *************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Create kubelet drop-in directory] ***************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Create kubelet kubeadm drop-in file] ************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Create kubelet systemd file] ********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Download crictl] ********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Create "/usr/local/bin" directory] **************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: ok: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Unpack crictl] **********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Remove crictl tarball] **************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Symlink cri-tools] ******************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: [WARNING]: Cannot set fs attributes on a non-existent symlink target. follow[0m
+[1;32m==> qemu.capi-ubuntu-arm64: should be set to False to avoid this.[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item=ctr)[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item=crictl)[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item=critest)[0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Create kubelet default config file] *************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Enable kubelet service] *************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Create the Kubernetes version file] *************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Create libexec directory] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Drop kubelet resource sizing script] ************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Drop kubelet resource sizing systemd unit file] *************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Create bash-completion directory] ***************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Generate kubectl bash completion] ***************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Generate kubeadm bash completion] ***************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Generate crictl bash completion] ****************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Set KUBECONFIG variable and alias] **************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Check if Kubernetes container registry is using Amazon ECR] ***[0m
+[1;32m==> qemu.capi-ubuntu-arm64: ok: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Create kubeadm config file] *********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Kubeadm pull images] ****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Delete kubeadm config] **************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Create kubeadm config file] *********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Get images list] ********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Log into ECR] ***********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Pull images] ************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [kubernetes : Delete kubeadm config] **************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [ansible.builtin.include_role : load_additional_components] ***************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [ansible.builtin.include_role : ecr_credential_provider] ******************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [ansible.builtin.include_role : {{ role }}] *******************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [ansible.builtin.include_role : sysprep] **********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: included: sysprep for default[0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Define file modes] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: ok: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Pin all installed packages with apt-mark] **********************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Unpin grub packages with apt-mark for MaaS] ********************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Remove extra repos] ********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Find disabled repo files] **************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Enable repos] **************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Remove templated apt.conf.d/90proxy used for http(s)_proxy support] ***[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Get installed service] *****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: ok: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Stop auditing] *************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Remove apt package caches] *************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: ok: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Remove apt package lists] **************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item={'path': '/var/lib/apt/lists', 'state': 'absent', 'mode': '0755'})[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item={'path': '/var/lib/apt/lists', 'state': 'directory', 'mode': '0755'})[0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Disable apt-daily services] ************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item=apt-daily.timer)[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item=apt-daily-upgrade.timer)[0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Get installed packages] ****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: ok: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Disable unattended upgrades if installed] **********************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Reset network interface IDs] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: ok: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Determine if update-grub is present] ***************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: ok: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Configure grub for non graphical consoles] *********************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Removing subiquity disable cloud-init networking config] *******[0m
+[1;32m==> qemu.capi-ubuntu-arm64: ok: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Removing 99-installer.cfg which sets the cloud-init datasource to None] ***[0m
+[1;32m==> qemu.capi-ubuntu-arm64: ok: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Removing subiquity curtin preserve sources config] *************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: ok: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Removing cloud-init ds identify config] ************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: ok: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Removing 90-installer-network.cfg installer network configuration] ***[0m
+[1;32m==> qemu.capi-ubuntu-arm64: ok: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Define file modes] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Invalidate the machine-id file for systemd to reevaluate presets] ***[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Stop and mask update-engine to freeze the image version] *******[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Stop and mask the locksmith reboot manager since it depends on update-engine] ***[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Mask docker] ***************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default] => (item=docker.socket)[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default] => (item=docker.service)[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Remove autologin from grub] ************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Set cgroup v1 to match the cgroupfs driver in containerd and kubelet] ***[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Set oem_id in grub] ********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Define file modes] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Get installed packages] ****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Create the package list] ***************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Exclude the packages from upgrades] ****************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Exclude packages from upgrade] *********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Remove extra repos] ********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Find disabled repo files] **************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Enable repos] **************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Disable swap service and ensure it is masked] ******************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Disable swap service and ensure it is masked on RHEL 8] ********[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Enable repo mgmt with subscription-manager] ********************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Remove subscriptions] ******************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Unregister system] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Clean local subscription data] *********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Remove yum package caches] *************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Remove yum package lists] **************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Reset network interface IDs] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Migrate interface configuration files to NetworkManager keyfiles] ***[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Reset network interface IDs] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Remove the kickstart log] **************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Define file modes] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Get installed packages] ****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Create the package list] ***************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Remove extra repos] ********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Find disabled repo files] **************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Enable repos] **************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Ensure nftables config ends with a newline] ********************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Disable swap service and ensure it is masked] ******************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Remove the kickstart log] **************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Define file modes] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Set hostname] **************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Remove the kickstart log] **************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Get installed packages] ****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Create a package list] *****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Exclude packages from upgrade] *********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Remove extra repos] ********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Find disabled repo files] **************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Enable repos] **************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Update the repos package to import the recent gpg keys] ********[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Remove tdnf package caches] ************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Lock root account] *********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Remove containerd http proxy conf file if needed] **************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Remove pip conf file if needed] ********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Truncate machine id] *******************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item={'path': '/etc/machine-id', 'state': 'absent', 'mode': '0644'})[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item={'path': '/etc/machine-id', 'state': 'touch', 'mode': '0644'})[0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Truncate hostname file] ****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item={'path': '/etc/hostname', 'state': 'absent', 'mode': '0644'})[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item={'path': '/etc/hostname', 'state': 'touch', 'mode': '0644'})[0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Set hostname] **************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Reset hosts file] **********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Truncate audit logs] *******************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item={'path': '/var/log/wtmp', 'state': 'absent', 'mode': '0664'})[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item={'path': '/var/log/lastlog', 'state': 'absent', 'mode': '0664'})[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item={'path': '/var/log/wtmp', 'state': 'touch', 'mode': '0664'})[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item={'path': '/var/log/lastlog', 'state': 'touch', 'mode': '0664'})[0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Remove cloud-init lib dir and logs] ****************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item=/var/lib/cloud)[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item=/var/log/cloud-init.log)[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item=/var/log/cloud-init-output.log)[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item=/var/run/cloud-init)[0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Reset cloud-init] **********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Reset cloud-init] **********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Remove cloud-init.disabled] ************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: ok: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Find temp files] ***********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: ok: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Reset temp space] **********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item={'path': '/tmp/systemd-private-e5220b1803a547219bd26c56b245dfe5-chrony.service-sGE1ND', 'mode': '0700', 'isdir': True, 'ischr': False, 'isblk': False, 'isreg': False, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 0, 'gid': 0, 'size': 4096, 'inode': 259389, 'dev': 64513, 'nlink': 3, 'atime': 1767838343.0640001, 'mtime': 1767838343.0640001, 'ctime': 1767838343.0640001, 'gr_name': 'root', 'pw_name': 'root', 'wusr': True, 'rusr': True, 'xusr': True, 'wgrp': False, 'rgrp': False, 'xgrp': False, 'woth': False, 'roth': False, 'xoth': False, 'isuid': False, 'isgid': False})[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item={'path': '/tmp/systemd-private-e5220b1803a547219bd26c56b245dfe5-systemd-hostnamed.service-Oq2QKT', 'mode': '0700', 'isdir': True, 'ischr': False, 'isblk': False, 'isreg': False, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 0, 'gid': 0, 'size': 4096, 'inode': 522030, 'dev': 64513, 'nlink': 3, 'atime': 1767838551.7402859, 'mtime': 1767838551.7402859, 'ctime': 1767838551.7402859, 'gr_name': 'root', 'pw_name': 'root', 'wusr': True, 'rusr': True, 'xusr': True, 'wgrp': False, 'rgrp': False, 'xgrp': False, 'woth': False, 'roth': False, 'xoth': False, 'isuid': False, 'isgid': False})[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item={'path': '/tmp/systemd-private-e5220b1803a547219bd26c56b245dfe5-systemd-resolved.service-1NJSlf', 'mode': '0700', 'isdir': True, 'ischr': False, 'isblk': False, 'isreg': False, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 0, 'gid': 0, 'size': 4096, 'inode': 259384, 'dev': 64513, 'nlink': 3, 'atime': 1767838340.98, 'mtime': 1767838340.98, 'ctime': 1767838340.98, 'gr_name': 'root', 'pw_name': 'root', 'wusr': True, 'rusr': True, 'xusr': True, 'wgrp': False, 'rgrp': False, 'xgrp': False, 'woth': False, 'roth': False, 'xoth': False, 'isuid': False, 'isgid': False})[0m
+[1;32m==> qemu.capi-ubuntu-arm64: ok: [default] => (item={'path': '/tmp/ansible_ansible.builtin.find_payload_7hlqg_ig', 'mode': '0700', 'isdir': True, 'ischr': False, 'isblk': False, 'isreg': False, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 0, 'gid': 0, 'size': 4096, 'inode': 522029, 'dev': 64513, 'nlink': 2, 'atime': 1767838565.6001625, 'mtime': 1767838565.6001625, 'ctime': 1767838565.6001625, 'gr_name': 'root', 'pw_name': 'root', 'wusr': True, 'rusr': True, 'xusr': True, 'wgrp': False, 'rgrp': False, 'xgrp': False, 'woth': False, 'roth': False, 'xoth': False, 'isuid': False, 'isgid': False})[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item={'path': '/tmp/systemd-private-e5220b1803a547219bd26c56b245dfe5-systemd-logind.service-bCTi9U', 'mode': '0700', 'isdir': True, 'ischr': False, 'isblk': False, 'isreg': False, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 0, 'gid': 0, 'size': 4096, 'inode': 264156, 'dev': 64513, 'nlink': 3, 'atime': 1767838343.088, 'mtime': 1767838343.088, 'ctime': 1767838343.088, 'gr_name': 'root', 'pw_name': 'root', 'wusr': True, 'rusr': True, 'xusr': True, 'wgrp': False, 'rgrp': False, 'xgrp': False, 'woth': False, 'roth': False, 'xoth': False, 'isuid': False, 'isgid': False})[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item={'path': '/tmp/snap-private-tmp', 'mode': '0700', 'isdir': True, 'ischr': False, 'isblk': False, 'isreg': False, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 0, 'gid': 0, 'size': 4096, 'inode': 259348, 'dev': 64513, 'nlink': 3, 'atime': 1767838340.576, 'mtime': 1767838343.2084415, 'ctime': 1767838343.2084415, 'gr_name': 'root', 'pw_name': 'root', 'wusr': True, 'rusr': True, 'xusr': True, 'wgrp': False, 'rgrp': False, 'xgrp': False, 'woth': False, 'roth': False, 'xoth': False, 'isuid': False, 'isgid': False})[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item={'path': '/var/tmp/systemd-private-e5220b1803a547219bd26c56b245dfe5-chrony.service-xcMh4C', 'mode': '0700', 'isdir': True, 'ischr': False, 'isblk': False, 'isreg': False, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 0, 'gid': 0, 'size': 4096, 'inode': 259430, 'dev': 64513, 'nlink': 3, 'atime': 1767838343.0640001, 'mtime': 1767838343.0640001, 'ctime': 1767838343.0640001, 'gr_name': 'root', 'pw_name': 'root', 'wusr': True, 'rusr': True, 'xusr': True, 'wgrp': False, 'rgrp': False, 'xgrp': False, 'woth': False, 'roth': False, 'xoth': False, 'isuid': False, 'isgid': False})[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item={'path': '/var/tmp/systemd-private-e5220b1803a547219bd26c56b245dfe5-systemd-hostnamed.service-klcr95', 'mode': '0700', 'isdir': True, 'ischr': False, 'isblk': False, 'isreg': False, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 0, 'gid': 0, 'size': 4096, 'inode': 522032, 'dev': 64513, 'nlink': 3, 'atime': 1767838551.7402859, 'mtime': 1767838551.7402859, 'ctime': 1767838551.7402859, 'gr_name': 'root', 'pw_name': 'root', 'wusr': True, 'rusr': True, 'xusr': True, 'wgrp': False, 'rgrp': False, 'xgrp': False, 'woth': False, 'roth': False, 'xoth': False, 'isuid': False, 'isgid': False})[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item={'path': '/var/tmp/systemd-private-e5220b1803a547219bd26c56b245dfe5-systemd-resolved.service-kgg98X', 'mode': '0700', 'isdir': True, 'ischr': False, 'isblk': False, 'isreg': False, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 0, 'gid': 0, 'size': 4096, 'inode': 259387, 'dev': 64513, 'nlink': 3, 'atime': 1767838340.98, 'mtime': 1767838340.98, 'ctime': 1767838340.98, 'gr_name': 'root', 'pw_name': 'root', 'wusr': True, 'rusr': True, 'xusr': True, 'wgrp': False, 'rgrp': False, 'xgrp': False, 'woth': False, 'roth': False, 'xoth': False, 'isuid': False, 'isgid': False})[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item={'path': '/var/tmp/cloud-init', 'mode': '1777', 'isdir': True, 'ischr': False, 'isblk': False, 'isreg': False, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 0, 'gid': 0, 'size': 4096, 'inode': 75831, 'dev': 64513, 'nlink': 2, 'atime': 1767838275.172, 'mtime': 1767838343.008, 'ctime': 1767838343.008, 'gr_name': 'root', 'pw_name': 'root', 'wusr': True, 'rusr': True, 'xusr': True, 'wgrp': True, 'rgrp': True, 'xgrp': True, 'woth': True, 'roth': True, 'xoth': True, 'isuid': False, 'isgid': False})[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item={'path': '/var/tmp/systemd-private-e5220b1803a547219bd26c56b245dfe5-systemd-logind.service-v2mC8s', 'mode': '0700', 'isdir': True, 'ischr': False, 'isblk': False, 'isreg': False, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 0, 'gid': 0, 'size': 4096, 'inode': 264158, 'dev': 64513, 'nlink': 3, 'atime': 1767838343.088, 'mtime': 1767838343.088, 'ctime': 1767838343.088, 'gr_name': 'root', 'pw_name': 'root', 'wusr': True, 'rusr': True, 'xusr': True, 'wgrp': False, 'rgrp': False, 'xgrp': False, 'woth': False, 'roth': False, 'xoth': False, 'isuid': False, 'isgid': False})[0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Find netplan files] ********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: [WARNING]: Skipped '/run/netplan' path due to this access issue: '/run/netplan'[0m
+[1;32m==> qemu.capi-ubuntu-arm64: is not a directory[0m
+[1;32m==> qemu.capi-ubuntu-arm64: ok: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Delete netplan files] ******************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item={'path': '/etc/netplan/50-cloud-init.yaml', 'mode': '0600', 'isdir': False, 'ischr': False, 'isblk': False, 'isreg': True, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 0, 'gid': 0, 'size': 511, 'inode': 75786, 'dev': 64513, 'nlink': 1, 'atime': 1767838273.732, 'mtime': 1767838273.6200001, 'ctime': 1767838273.6200001, 'gr_name': 'root', 'pw_name': 'root', 'wusr': True, 'rusr': True, 'xusr': False, 'wgrp': False, 'rgrp': False, 'xgrp': False, 'woth': False, 'roth': False, 'xoth': False, 'isuid': False, 'isgid': False})[0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Create netplan for KubeVirt] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Find SSH host keys] ********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: ok: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Remove SSH host keys] ******************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item={'path': '/etc/ssh/ssh_host_ed25519_key.pub', 'mode': '0644', 'isdir': False, 'ischr': False, 'isblk': False, 'isreg': True, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 0, 'gid': 0, 'size': 99, 'inode': 75849, 'dev': 64513, 'nlink': 1, 'atime': 1767838277.528, 'mtime': 1767838277.08, 'ctime': 1767838277.08, 'gr_name': 'root', 'pw_name': 'root', 'wusr': True, 'rusr': True, 'xusr': False, 'wgrp': False, 'rgrp': True, 'xgrp': False, 'woth': False, 'roth': True, 'xoth': False, 'isuid': False, 'isgid': False})[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item={'path': '/etc/ssh/ssh_host_ecdsa_key', 'mode': '0600', 'isdir': False, 'ischr': False, 'isblk': False, 'isreg': True, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 0, 'gid': 0, 'size': 513, 'inode': 75840, 'dev': 64513, 'nlink': 1, 'atime': 1767838277.528, 'mtime': 1767838277.076, 'ctime': 1767838277.076, 'gr_name': 'root', 'pw_name': 'root', 'wusr': True, 'rusr': True, 'xusr': False, 'wgrp': False, 'rgrp': False, 'xgrp': False, 'woth': False, 'roth': False, 'xoth': False, 'isuid': False, 'isgid': False})[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item={'path': '/etc/ssh/ssh_host_rsa_key', 'mode': '0600', 'isdir': False, 'ischr': False, 'isblk': False, 'isreg': True, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 0, 'gid': 0, 'size': 2602, 'inode': 75838, 'dev': 64513, 'nlink': 1, 'atime': 1767838277.528, 'mtime': 1767838277.072, 'ctime': 1767838277.072, 'gr_name': 'root', 'pw_name': 'root', 'wusr': True, 'rusr': True, 'xusr': False, 'wgrp': False, 'rgrp': False, 'xgrp': False, 'woth': False, 'roth': False, 'xoth': False, 'isuid': False, 'isgid': False})[0m
+[1;32m==> qemu.capi-ubuntu-arm64: changed: [default] => (item={'path': '/etc/ssh/ssh_host_ecdsa_key.pub', 'mode': '0644', 'isdir': False, 'ischr': False, 'isblk': False, 'isreg': True, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 0, 'gid': 0, 'size': 179, 'inode': 75841, 'dev': 64513, 'nlink': 1, 'atime': 1767838277.08, 'mtime': 1767838277.076, 'ctime': 1767838277.076, 'gr_name': 'root', 'pw_name': 'root', 'wusr': True, 'rusr': True, 'xusr': False, 'wgrp': False, 'rgrp': True, 'xgrp': False, 'woth': False, 'roth': True, 'xoth': False, 'isuid': False, 'isgid': False})[0m
+[1;32m==> qemu.capi-ubuntu-arm64: fatal: [default]: FAILED! => {"msg": "Failed to connect to the host via ssh: kex_exchange_identification: Connection closed by remote host\r\nConnection closed by 127.0.0.1 port 4071"}[0m
+[1;32m==> qemu.capi-ubuntu-arm64: ...ignoring[0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Remove SSH authorized users] ***********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: failed: [default] (item={'path': '/root/.ssh/authorized_keys'}) => {"ansible_loop_var": "item", "item": {"path": "/root/.ssh/authorized_keys"}, "msg": "Failed to connect to the host via ssh: kex_exchange_identification: Connection closed by remote host\r\nConnection closed by 127.0.0.1 port 4071", "unreachable": true}[0m
+[1;32m==> qemu.capi-ubuntu-arm64: failed: [default] (item={'path': '/home/builder/.ssh/authorized_keys'}) => {"ansible_loop_var": "item", "item": {"path": "/home/builder/.ssh/authorized_keys"}, "msg": "Failed to connect to the host via ssh: kex_exchange_identification: Connection closed by remote host\r\nConnection closed by 127.0.0.1 port 4071", "unreachable": true}[0m
+[1;32m==> qemu.capi-ubuntu-arm64: fatal: [default]: UNREACHABLE! => {"changed": false, "msg": "All items completed", "results": [{"ansible_loop_var": "item", "item": {"path": "/root/.ssh/authorized_keys"}, "msg": "Failed to connect to the host via ssh: kex_exchange_identification: Connection closed by remote host\r\nConnection closed by 127.0.0.1 port 4071", "unreachable": true}, {"ansible_loop_var": "item", "item": {"path": "/home/builder/.ssh/authorized_keys"}, "msg": "Failed to connect to the host via ssh: kex_exchange_identification: Connection closed by remote host\r\nConnection closed by 127.0.0.1 port 4071", "unreachable": true}], "unreachable": true}[0m
+[1;32m==> qemu.capi-ubuntu-arm64: ...ignoring[0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Remove SSH authorized users for Flatcar] ***********************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default] => (item={'path': '/root/.ssh/authorized_keys'})[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Truncate all remaining log files in /var/log] ******************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: fatal: [default]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: kex_exchange_identification: Connection closed by remote host\r\nConnection closed by 127.0.0.1 port 4071", "unreachable": true}[0m
+[1;32m==> qemu.capi-ubuntu-arm64: ...ignoring[0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Delete all logrotated logs] ************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: fatal: [default]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: kex_exchange_identification: Connection closed by remote host\r\nConnection closed by 127.0.0.1 port 4071", "unreachable": true}[0m
+[1;32m==> qemu.capi-ubuntu-arm64: ...ignoring[0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Remove swapfile] ***********************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default] => (item=/swap.img)[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default] => (item=/swapfile)[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default] => (item=/mnt/resource/swapfile)[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Truncate shell history] ****************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: failed: [default] (item={'path': '/root/.bash_history'}) => {"ansible_loop_var": "item", "item": {"path": "/root/.bash_history"}, "msg": "Failed to connect to the host via ssh: kex_exchange_identification: Connection closed by remote host\r\nConnection closed by 127.0.0.1 port 4071", "unreachable": true}[0m
+[1;32m==> qemu.capi-ubuntu-arm64: failed: [default] (item={'path': '/home/builder/.bash_history'}) => {"ansible_loop_var": "item", "item": {"path": "/home/builder/.bash_history"}, "msg": "Failed to connect to the host via ssh: kex_exchange_identification: Connection closed by remote host\r\nConnection closed by 127.0.0.1 port 4071", "unreachable": true}[0m
+[1;32m==> qemu.capi-ubuntu-arm64: fatal: [default]: UNREACHABLE! => {"changed": false, "msg": "All items completed", "results": [{"ansible_loop_var": "item", "item": {"path": "/root/.bash_history"}, "msg": "Failed to connect to the host via ssh: kex_exchange_identification: Connection closed by remote host\r\nConnection closed by 127.0.0.1 port 4071", "unreachable": true}, {"ansible_loop_var": "item", "item": {"path": "/home/builder/.bash_history"}, "msg": "Failed to connect to the host via ssh: kex_exchange_identification: Connection closed by remote host\r\nConnection closed by 127.0.0.1 port 4071", "unreachable": true}], "unreachable": true}[0m
+[1;32m==> qemu.capi-ubuntu-arm64: ...ignoring[0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Rotate journalctl to archive logs] *****************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: fatal: [default]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: kex_exchange_identification: Connection closed by remote host\r\nConnection closed by 127.0.0.1 port 4071", "unreachable": true}[0m
+[1;32m==> qemu.capi-ubuntu-arm64: ...ignoring[0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Remove archived journalctl logs] *******************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: fatal: [default]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: kex_exchange_identification: Connection closed by remote host\r\nConnection closed by 127.0.0.1 port 4071", "unreachable": true}[0m
+[1;32m==> qemu.capi-ubuntu-arm64: ...ignoring[0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Ensure ignition runs on next boot] *****************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Remove any default Ignition files used by Packer] **************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Start fstrim] **************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: fatal: [default]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: kex_exchange_identification: Connection closed by remote host\r\nConnection closed by 127.0.0.1 port 4071", "unreachable": true}[0m
+[1;32m==> qemu.capi-ubuntu-arm64: ...ignoring[0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [sysprep : Start ssh] *****************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: fatal: [default]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: kex_exchange_identification: Connection closed by remote host\r\nConnection closed by 127.0.0.1 port 4071", "unreachable": true}[0m
+[1;32m==> qemu.capi-ubuntu-arm64: ...ignoring[0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: TASK [ansible.builtin.include_role : {{ role }}] *******************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: skipping: [default][0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: RUNNING HANDLER [sysprep : Update debian grub] *********************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: fatal: [default]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: kex_exchange_identification: Connection closed by remote host\r\nConnection closed by 127.0.0.1 port 4071", "unreachable": true}[0m
+[1;32m==> qemu.capi-ubuntu-arm64: ...ignoring[0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: PLAY RECAP *********************************************************************[0m
+[1;32m==> qemu.capi-ubuntu-arm64: default                    : ok=113  changed=75   unreachable=0    failed=0    skipped=441  rescued=0    ignored=10[0m
+[1;32m==> qemu.capi-ubuntu-arm64:[0m
+[1;32m==> qemu.capi-ubuntu-arm64: Halting the virtual machine...[0m
+[1;32m==> qemu.capi-ubuntu-arm64: Converting hard drive...[0m
+[1;32m==> qemu.capi-ubuntu-arm64: Error getting file lock for conversion; retrying...[0m
+[1;32mBuild 'qemu.capi-ubuntu-arm64' finished after 6 minutes 15 seconds.[0m
+
+==> Wait completed after 6 minutes 15 seconds
+
+==> Builds finished. The artifacts of successful builds are:
+--> qemu.capi-ubuntu-arm64: VM files in directory: /opt/capi-build/output
+[SUCCESS] 02:17:02 Packer build completed in 377s
+[INFO] 02:17:02 Converting image formats...
+[INFO] 02:17:02 Converting to RAW format...
+[INFO] 02:17:04 Converting to VMDK format...
+[INFO] 02:17:07 Creating OVA package...
+ubuntu-2204-arm64-kube-1.32.4.ovf
+ubuntu-2204-arm64-kube-1.32.4.vmdk
+ubuntu-2204-arm64-kube-1.32.4.mf
+total 17G
+-rw-rw---- 1 ubuntu ubuntu  64M Jan  8 02:12 efivars.fd
+-rw-rw-r-- 1 ubuntu ubuntu 4.1G Jan  8 02:17 ubuntu-2204-arm64-kube-1.32.4.ova
+-rw-r--r-- 1 ubuntu ubuntu 4.1G Jan  8 02:16 ubuntu-2204-arm64-kube-1.32.4.qcow2
+-rw-r--r-- 1 ubuntu ubuntu  20G Jan  8 02:17 ubuntu-2204-arm64-kube-1.32.4.raw
+-rw-r--r-- 1 ubuntu ubuntu 4.1G Jan  8 02:17 ubuntu-2204-arm64-kube-1.32.4.vmdk
+[SUCCESS] 02:17:24 All format conversions completed
+[INFO] 02:17:24 Extracting PXE boot files...
+/dev/nbd0 disconnected
+total 141M
+-rw-r--r-- 1 ubuntu ubuntu 33M Jan  8 02:17 initrd.img
+-rw-r--r-- 1 ubuntu ubuntu 33M Jan  8 02:17 initrd.img-5.15.0-164-generic
+-rw-r--r-- 1 ubuntu ubuntu 33M Jan  8 02:17 initrd.img.old
+-rw-r--r-- 1 ubuntu ubuntu 15M Jan  8 02:17 vmlinuz
+-rw-r--r-- 1 ubuntu ubuntu 15M Jan  8 02:17 vmlinuz-5.15.0-164-generic
+-rw-r--r-- 1 ubuntu ubuntu 15M Jan  8 02:17 vmlinuz.old
+
+[SUCCESS] 02:17:29 PXE files extracted
+╔═══════════════════════════════════════════════════════════════════╗
+║                     BUILD COMPLETE                                ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+  Total time: 404s (6m 44s)
+
+  Output files:
+total 17G
+-rw-rw---- 1 ubuntu ubuntu  64M Jan  8 02:12 efivars.fd
+-rw-rw-r-- 1 ubuntu ubuntu 4.1G Jan  8 02:17 ubuntu-2204-arm64-kube-1.32.4.ova
+-rw-r--r-- 1 ubuntu ubuntu 4.1G Jan  8 02:17 ubuntu-2204-arm64-kube-1.32.4.qcow2
+-rw-r--r-- 1 ubuntu ubuntu  20G Jan  8 02:17 ubuntu-2204-arm64-kube-1.32.4.raw
+-rw-r--r-- 1 ubuntu ubuntu 4.1G Jan  8 02:17 ubuntu-2204-arm64-kube-1.32.4.vmdk
+
+  PXE files:
+total 141M
+-rw-r--r-- 1 ubuntu ubuntu 33M Jan  8 02:17 initrd.img
+-rw-r--r-- 1 ubuntu ubuntu 33M Jan  8 02:17 initrd.img-5.15.0-164-generic
+-rw-r--r-- 1 ubuntu ubuntu 33M Jan  8 02:17 initrd.img.old
+-rw-r--r-- 1 ubuntu ubuntu 15M Jan  8 02:17 vmlinuz
+-rw-r--r-- 1 ubuntu ubuntu 15M Jan  8 02:17 vmlinuz-5.15.0-164-generic
+-rw-r--r-- 1 ubuntu ubuntu 15M Jan  8 02:17 vmlinuz.old
+

@@ -1,0 +1,17 @@
+set timeout=10
+set default=0
+
+menuentry "Ubuntu ARM64 CAPI Image - Network Boot" {
+    linux /vmlinuz-arm64 ip=dhcp root=/dev/ram0 ramdisk_size=2097152 console=ttyAMA0,115200
+    initrd /initrd-arm64.img
+}
+
+menuentry "Ubuntu ARM64 CAPI Image - Install via cloud-init" {
+    linux /vmlinuz-arm64 ip=dhcp autoinstall ds=nocloud-net;s=http://{{ pxe_server_ip }}/cloud-init/ console=ttyAMA0,115200
+    initrd /initrd-arm64.img
+}
+
+menuentry "Ubuntu ARM64 CAPI Image - Rescue Mode" {
+    linux /vmlinuz-arm64 ip=dhcp single console=ttyAMA0,115200
+    initrd /initrd-arm64.img
+}

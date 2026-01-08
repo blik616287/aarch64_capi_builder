@@ -1,0 +1,30 @@
+#cloud-config
+users:
+  - name: ubuntu
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+    lock_passwd: false
+    ssh_authorized_keys:
+{% if ssh_public_key is defined %}
+      - {{ ssh_public_key }}
+{% else %}
+      - ssh-rsa PLACEHOLDER_REPLACE_WITH_YOUR_SSH_KEY
+{% endif %}
+
+package_update: true
+package_upgrade: true
+
+packages:
+  - qemu-guest-agent
+  - cloud-init
+  - openssh-server
+
+# Kubernetes prerequisites will be handled by CAPI image
+# This is just for basic boot verification
+
+runcmd:
+  - systemctl enable qemu-guest-agent
+  - systemctl start qemu-guest-agent
+  - echo "Cloud-init complete!" > /var/log/cloud-init-complete.log
+
+final_message: "Cloud-init completed in $UPTIME seconds"

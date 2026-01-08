@@ -1,0 +1,93 @@
+---
+- name: Configure PXE Boot Server
+  hosts: role_pxe
+  become: yes
+  vars:
+    tftp_root: /var/lib/tftpboot
+    http_root: /var/www/html
+    image_dir: "{{ http_root }}/images"
+    cloud_init_dir: "{{ http_root }}/cloud-init"
+
+  tasks:
+    - name: Wait for cloud-init to complete
+      wait_for:
+        path: /tmp/user-data-complete
+        timeout: 600
+
+    - name: Get instance private IP
+      uri:
+        url: http://169.254.169.254/latest/meta-data/local-ipv4
+        return_content: yes
+      register: instance_ip
+
+    - name: Set PXE server IP fact
+      set_fact:
+        pxe_server_ip: "{{ instance_ip.content }}"
+
+    - name: Update GRUB config with server IP
+      template:
+        src: templates/grub.cfg.j2
+        dest: "{{ tftp_root }}/grub/grub.cfg"
+        owner: tftp
+        group: tftp
+        mode: '0644'
+
+    - name: Download ARM64 kernel and initrd from S3 (if available)
+      block:
+        - name: Download vmlinuz
+          aws_s3:
+            bucket: "{{ lookup('env', 'S3_BUCKET') }}"
+            object: "pxe/vmlinuz-arm64"
+            dest: "{{ tftp_root }}/vmlinuz-arm64"
+            mode: get
+          ignore_errors: yes
+
+        - name: Download initrd
+          aws_s3:
+            bucket: "{{ lookup('env', 'S3_BUCKET') }}"
+            object: "pxe/initrd-arm64.img"
+            dest: "{{ tftp_root }}/initrd-arm64.img"
+            mode: get
+          ignore_errors: yes
+      when: lookup('env', 'S3_BUCKET') != ''
+
+    - name: Set permissions on TFTP files
+      file:
+        path: "{{ tftp_root }}"
+        state: directory
+        owner: tftp
+        group: tftp
+        mode: '0755'
+        recurse: yes
+
+    - name: Configure cloud-init user-data with SSH key
+      template:
+        src: templates/user-data.j2
+        dest: "{{ cloud_init_dir }}/user-data"
+        owner: www-data
+        group: www-data
+        mode: '0644'
+      when: ssh_public_key is defined
+
+    - name: Restart nginx
+      service:
+        name: nginx
+        state: restarted
+
+    - name: Print PXE server info
+      debug:
+        msg: |
+          PXE server configured!
+
+          Server IP: {{ pxe_server_ip }}
+          TFTP Root: {{ tftp_root }}
+          HTTP Root: {{ http_root }}
+
+          To complete setup:
+            1. Upload kernel/initrd to {{ tftp_root }}/
+            2. Upload disk image to {{ image_dir }}/
+            3. Review /etc/dnsmasq.d/pxe.conf
+            4. Start DHCP: sudo systemctl start dnsmasq
+
+          WARNING: Only start dnsmasq on an isolated network!
+          Running DHCP on a shared network can cause conflicts.
