@@ -307,4 +307,5 @@ kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/master/Doc
 ```
 
 ## License
-MIT
+
+[MIT](LICENSE) © 2026 Martin Forde <mforde84@gmail.com>, [Blik Labs](https://bliklabs.com).
